@@ -1,0 +1,34 @@
+model:
+  name: "seq2seq_transformer"
+  embedding_dim: 512
+  hidden_dim: 2048
+  num_layers: 6
+  num_heads: 8
+  dropout: 0.1
+  max_seq_length: 1024
+  vocab_size: 50000
+  
+training:
+  batch_size: 32
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  warmup_steps: 4000
+  max_epochs: 100
+  gradient_clip_val: 1.0
+  early_stopping_patience: 5
+  checkpoint_dir: "./checkpoints/"
+  
+evaluation:
+  batch_size: 16
+  beam_size: 4
+  length_penalty: 0.6
+  metrics:
+    - "bleu"
+    - "rouge"
+    - "exact_match"
+    
+data:
+  train_file: "./data/train.jsonl"
+  dev_file: "./data/dev.jsonl"
+  test_file: "./data/test.jsonl"
+  num_workers: 4

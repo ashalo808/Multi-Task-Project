@@ -1,0 +1,34 @@
+# 基础依赖
+numpy>=1.19.0
+pandas>=1.1.0
+scikit-learn>=0.24.0
+matplotlib>=3.3.0
+seaborn>=0.11.0
+
+# PyTorch及相关
+torch>=1.9.0
+torchvision>=0.10.0
+tensorboard>=2.5.0
+
+# Hugging Face Transformers
+transformers>=4.11.0
+datasets>=1.11.0
+tokenizers>=0.10.3
+
+# 数据处理与评估
+nltk>=3.6.0
+jieba>=0.42.1  # 中文分词
+rouge>=1.0.1   # 文本摘要评估
+sacrebleu>=2.0.0  # 机器翻译评估
+
+# 配置和日志
+pyyaml>=5.4.0
+tqdm>=4.62.0
+
+# 实用工具
+py-rouge>=1.1
+sentencepiece>=0.1.96  # 词元分割
+
+# 深度学习扩展
+accelerate>=0.6.0  # 用于分布式训练
+einops>=0.3.2  # 张量操作工具

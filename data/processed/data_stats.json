@@ -1,0 +1,14 @@
+{
+    "dev_file": {
+        "total_samples": 100000,
+        "task_types": {
+            "mrc": 31408,
+            "classify": 44414,
+            "generate": 3841,
+            "nli": 19485,
+            "anaphora_resolution": 852
+        },
+        "avg_input_length": 221.89194,
+        "avg_target_length": 4.99629
+    }
+}

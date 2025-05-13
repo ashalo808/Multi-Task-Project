@@ -1,0 +1,64 @@
+templates:
+  # 文本分类任务模板 (tnews)
+  text_classification:
+    input_format: |
+      请判断以下文本属于哪个类别：
+      
+      文本: {input_text}
+      
+      候选类别: {answer_choices}
+    target_format: "{target}"
+  
+  # 自然语言推理任务模板 (ocnli)
+  natural_language_inference:
+    input_format: |
+      请判断以下两个句子之间的关系：
+      
+      {input_text}
+      
+      选择: {answer_choices}
+    target_format: "{target}"
+  
+  # 成语填空任务模板 (chid)
+  idiom_completion:
+    input_format: |
+      阅读以下文章，选择最适合填入空缺处的成语：
+      
+      文章: {input_text}
+      
+      候选成语: {answer_choices}
+    target_format: "{target}"
+  
+  # 多选分类任务通用模板
+  multiple_choice:
+    input_format: |
+      {input_text}
+      
+      选项: {answer_choices}
+    target_format: "{target}"
+  
+  # 阅读理解任务模板
+  reading_comprehension:
+    input_format: |
+      文章: {context}
+      
+      问题: {question}
+    target_format: "{answer}"
+  
+  # 通用模板
+  custom:
+    input_format: "{input_text}"
+    target_format: "{target}"
+
+# 全局模板设置
+settings:
+  default_template: "custom"
+  max_input_length: 896
+  max_target_length: 128
+  
+# 任务到模板的映射
+task_template_mapping:
+  classify: "text_classification"
+  nli: "natural_language_inference"
+  mrc: "reading_comprehension"
+  idiom_completion: "idiom_completion"

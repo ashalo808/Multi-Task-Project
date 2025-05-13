@@ -1,0 +1,88 @@
+# 多任务学习配置文件
+
+# 数据目录
+data_dir: "./data"
+
+# 模型配置
+model:
+  name: "bert-base-chinese"  # 预训练模型名称
+  hidden_size: 768
+  max_position_embeddings: 512
+  share_encoders: true       # 是否共享编码器
+  task_specific_params:
+    adapter_size: 64         # 任务适配器大小
+    dropout: 0.1
+
+# 训练配置
+training:
+  num_epochs: 5
+  batch_size: 32
+  learning_rate: 2e-5
+  weight_decay: 0.01
+  warmup_steps: 500
+  gradient_accumulation_steps: 1
+  max_grad_norm: 1.0
+  log_steps: 10
+  save_steps: 1000
+  eval_steps: 500
+  early_stopping_patience: 3
+  
+  # 任务采样权重（可选）
+  task_sampling_weights:
+    tnews: 1.0
+    ocnli: 1.2
+    chid: 0.8
+
+# 任务配置
+tasks:
+  # TNews 中文新闻分类任务
+  tnews:
+    type: "tnews"
+    data_subdir: "tnews"
+    description: "中文新闻短文本分类任务"
+    metrics:
+      - "accuracy"
+      - "f1"
+    params:
+      max_seq_length: 128
+      eval_batch_size: 64
+  
+  # OCNLI 中文自然语言推理任务
+  ocnli:
+    type: "ocnli"
+    data_subdir: "ocnli" 
+    description: "中文自然语言推理任务"
+    metrics:
+      - "accuracy"
+    params:
+      max_seq_length: 256
+      eval_batch_size: 32
+  
+  # CHID 成语阅读理解任务
+  chid:
+    type: "chid"
+    data_subdir: "chid"
+    description: "中文成语填空阅读理解任务"
+    metrics:
+      - "accuracy"
+      - "precision"
+      - "recall"
+    params:
+      max_seq_length: 512
+      eval_batch_size: 16
+      max_candidates: 10
+
+# 输出配置
+output:
+  save_model: true
+  save_intermediate: true
+  intermediate_dir: "checkpoints"
+  save_predictions: true
+  prediction_dir: "predictions"
+  
+# 日志配置
+logging:
+  level: "INFO"
+  log_to_file: true
+  log_file: "multitask_training.log"
+  tensorboard: true
